@@ -52,6 +52,7 @@ export default {
             <th>CATEGORIA</th>
             <th>AUTOR</th>
             <th>EDITORA</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>

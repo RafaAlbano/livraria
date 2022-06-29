@@ -21,6 +21,10 @@ export default {
                 });
             }
         },
+        excluir(categoria) {
+            const indice = this.categorias.indexOf(categoria);
+            this.categorias.splice(indice, 1);
+        },
     },
 };
 
