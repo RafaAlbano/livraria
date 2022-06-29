@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import CategoriaLivrariaVue from "../views/CategoriaLivraria.vue";
 import HomeView from "../views/HomeView.vue";
 import LivroLivraria from "../views/LivroLivraria.vue";
 
@@ -15,6 +16,11 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
+    {
+      path:"/categorias",
+      name:"categoria",
+      component:CategoriaLivrariaVue,
+    }
   ],
 });
 

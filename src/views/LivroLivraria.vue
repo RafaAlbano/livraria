@@ -25,6 +25,10 @@ export default {
         editora: this.nova_editora,
       });
     },
+    excluir(livro) {
+      const indice = this.livros.indexOf(livro);
+      this.livros.splice(indice, 1);
+    },
   },
 };
 </script>
@@ -35,11 +39,7 @@ export default {
     </div>
     <div class="form_input">
       <input type="text" placeholder="Informe nome" v-model="novo_livro" />
-      <input
-        type="text"
-        placeholder="Informe categoria"
-        v-model="nova_categoria"
-      />
+      <input type="text" placeholder="Informe categoria" v-model="nova_categoria" />
       <input type="text" placeholder="Informe autor" v-model="novo_autor" />
       <input type="text" placeholder="Informe editora" v-model="nova_editora" />
       <button @click="add">Add</button>
@@ -60,6 +60,9 @@ export default {
             <td>{{ livro.categoria }}</td>
             <td>{{ livro.autor }}</td>
             <td>{{ livro.editora }}</td>
+            <td>
+              <button @click="excluir(livro)">Excluir</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -71,6 +74,7 @@ export default {
   text-align: center;
   margin: 2rem 0;
 }
+
 .form_input {
   display: flex;
   flex-direction: column;
@@ -78,6 +82,7 @@ export default {
   align-items: center;
   margin: 2rem 0;
 }
+
 .form_input input {
   width: 50%;
   padding: 0.5rem;
@@ -85,6 +90,7 @@ export default {
   border-radius: 10px;
   margin-bottom: 0.7%;
 }
+
 .form_input button {
   padding: 0.5rem;
   width: 15%;
@@ -95,10 +101,12 @@ export default {
   font-weight: bold;
   margin-left: 1%;
 }
+
 .list_times {
   display: flex;
   justify-content: center;
 }
+
 table {
   width: 85%;
   border-radius: 1em;
@@ -107,10 +115,12 @@ table {
   font-size: 1.1rem;
   text-align: center;
 }
+
 table thead {
   background-color: rgb(103, 159, 207);
   color: white;
 }
+
 table tbody tr:nth-child(odd) {
   background-color: rgb(151, 189, 223);
   color: white;
