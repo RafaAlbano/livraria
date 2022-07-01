@@ -71,6 +71,9 @@ export default {
   </div>
 </template>
 <style>
+header{
+  border-radius: 0.8;
+}
 .title {
   text-align: center;
   margin: 2rem 0;
@@ -110,10 +113,11 @@ export default {
 
 table {
   width: 85%;
-  border-radius: 1em;
+  border-radius: 1px;
   margin: 0 auto;
-  border: 1px solid black;
+  border: 1px solid rgb(103, 159, 207);
   font-size: 1.1rem;
+  font-family: 'Times New Roman', Times, serif;
   text-align: center;
 }
 
@@ -125,5 +129,16 @@ table thead {
 table tbody tr:nth-child(odd) {
   background-color: rgb(151, 189, 223);
   color: white;
+}
+h2{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 3em;
+}
+.button {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1em;
+}
+main{
+  background-color: aliceblue;
 }
 </style>

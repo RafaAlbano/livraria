@@ -15,14 +15,16 @@
 </template>
 <style>
 header {
-  height: 10%;
+  height: 9%;
+  width: 100%;
   background-color: rgb(123, 169, 209);
   color: rgb(252, 244, 244);
-  font-size: 1.3em;
+  font-size: 1.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 20px;
+  font-family: 'Times New Roman', Times, serif;
 }
 header span {
   padding: 0 20px;
