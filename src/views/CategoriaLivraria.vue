@@ -44,9 +44,9 @@ export default {
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
-                    <th>Categorias</th>
-                    <th>Ações</th>
+                    <th>NOME</th>
+                    <th>CATEGORIA</th>
+                    <th>AÇÕES</th>
                 </tr>
             </thead>
             <tbody>

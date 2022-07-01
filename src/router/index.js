@@ -3,6 +3,7 @@ import CategoriaLivrariaVue from "../views/CategoriaLivraria.vue";
 import HomeView from "../views/HomeView.vue";
 import LivroLivraria from "../views/LivroLivraria.vue";
 import AutorLivraria from "../views/AutorLivraria.vue";
+import EditoraLivraria from "../views/EditoraLivraria.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path:"/autores",
       name:"autor",
       component: AutorLivraria,
+    },
+    {
+      path: "/editoras",
+      name: "editor",
+      component: EditoraLivraria,
     }
   ],
 });
