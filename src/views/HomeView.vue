@@ -1,6 +1,5 @@
 <template>
   <h1>Bem Vindos!</h1>
-  <h2>a livraria</h2>
 </template>
 <style>
 h1{
