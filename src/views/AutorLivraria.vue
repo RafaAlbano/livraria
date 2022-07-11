@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -12,12 +13,18 @@ export default {
       novo_autor: "",
     };
   },
+  async created() {
+    const autores = await axios.get("http://localhost:4000/autores");
+    this.autores = autores.data;
+  },
   methods: {
-    add() {
-      this.autores.push({
+    async add() {
+      const autor = {
         nome: this.novo_livro,
         autor: this.novo_autor,
-      });
+      };
+      const autor_criado = await axios.post("http://localhost:4000/autores", autor);
+      this.times.push(autor_criado.data);
     },
     excluir(autor) {
       const indice = this.autores.indexOf(autor);

@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -16,16 +17,26 @@ export default {
       nova_editora: "",
     };
   },
+  async created() {
+    const livros = await axios.get("http://localhost:4000/livros");
+    this.livros = livros.data;
+  },
   methods: {
-    add() {
-      this.livros.push({
+    async add() {
+      const livro = {
         nome: this.novo_livro,
         categoria: this.nova_categoria,
         autor: this.novo_autor,
         editora: this.nova_editora,
-      });
+      };
+      const livro_criado = await axios.post(
+        "http://localhost:4000/livros",
+        livro
+      );
+      this.livros.push(livro_criado.data);
     },
-    excluir(livro) {
+    async excluir(livro) {
+      await axios.delete(`http://localhost:4000/livros/${livro.id}`);
       const indice = this.livros.indexOf(livro);
       this.livros.splice(indice, 1);
     },
@@ -71,9 +82,10 @@ export default {
   </div>
 </template>
 <style>
-header{
+header {
   border-radius: 0.8;
 }
+
 .title {
   text-align: center;
   margin: 2rem 0;
@@ -130,15 +142,18 @@ table tbody tr:nth-child(odd) {
   background-color: rgb(151, 189, 223);
   color: white;
 }
-h2{
+
+h2 {
   font-family: 'Times New Roman', Times, serif;
   font-size: 3em;
 }
+
 .button {
   font-family: 'Times New Roman', Times, serif;
   font-size: 1em;
 }
-main{
+
+main {
   background-color: aliceblue;
 }
 </style>
