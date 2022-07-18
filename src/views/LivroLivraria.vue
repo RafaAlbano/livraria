@@ -29,11 +29,8 @@ export default {
         autor: this.novo_autor,
         editora: this.nova_editora,
       };
-      const livro_criado = await axios.post(
-        "http://localhost:4000/livros",
-        livro
-      );
-      this.livros.push(livro_criado.data);
+      const indice = this.categorias.indexOf(categoria);
+      this.categorias.splice(indice, 1);
     },
     async excluir(livro) {
       await axios.delete(`http://localhost:4000/livros/${livro.id}`);
@@ -50,7 +47,11 @@ export default {
     </div>
     <div class="form_input">
       <input type="text" placeholder="Informe nome" v-model="novo_livro" />
-      <input type="text" placeholder="Informe categoria" v-model="nova_categoria" />
+      <input
+        type="text"
+        placeholder="Informe categoria"
+        v-model="nova_categoria"
+      />
       <input type="text" placeholder="Informe autor" v-model="novo_autor" />
       <input type="text" placeholder="Informe editora" v-model="nova_editora" />
       <button @click="add">Add</button>
@@ -129,7 +130,7 @@ table {
   margin: 0 auto;
   border: 1px solid rgb(103, 159, 207);
   font-size: 1.1rem;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   text-align: center;
 }
 
@@ -144,12 +145,12 @@ table tbody tr:nth-child(odd) {
 }
 
 h2 {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 3em;
 }
 
 .button {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 1em;
 }
 
