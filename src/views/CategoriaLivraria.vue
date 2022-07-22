@@ -1,34 +1,34 @@
 <script>
-import axios from "axios";
+import CategoriasApi from "@/api/categorias.js";
+const categoriasApi = new CategoriasApi();
 export default {
   data() {
     return {
-      categorias: [
-        {
-          id: "9fc3ef4b-eeba-4dac-9b38-ec2388d6da39",
-          nome: "Livro1",
-          categoria: "Categoria1",
-        },
-      ],
-      novo_livro: "",
-      nova_categoria: "",
+      categoria: {},
+      categorias: [],
+      nome: []
+
     };
+  },
+  async created() {
+    this.categorias = await categoriasApi.buscarTodosAsCategorias();
   },
   methods: {
     async add() {
-      const categoria = {
-        nome: this.novo_livro,
-        categoria: this.nova_categoria,
-      };
-      const categoria_criada = await axios.post(
-        "http://localhost:4000/editoras/${editora.id},categoria"
-      );
-      this.livros.push(categoria_criada.data);
+      if (this.categoria.id) {
+        await categoriasApi.atualizarCategoria(this.categoria);
+      } else {
+        await categoriasApi.adicionarCategoria(this.categoria);
+      }
+      this.categorias = await categoriasApi.buscarTodosAsCategorias();
+      this.categoria = {};
     },
     async excluir(categoria) {
-      await axios.delete(`http://localhost:4000/categorias/${categoria.id}`);
-      const indice = this.categorias.indexOf(categoria);
-      this.categorias.splice(indice, 1);
+      await categoriasApi.excluirCategoria(categoria.id);
+      this.categorias = await categoriasApi.buscarTodosAsCategorias();
+    },
+    editar(categoria) {
+      Object.assign(this.categoria, categoria);
     },
   },
 };
@@ -39,18 +39,7 @@ export default {
       <h2>Categorias</h2>
     </div>
     <div class="form_input">
-      <input
-        type="text"
-        placeholder="Livro"
-        v-model="novo_livro"
-        @keydown.enter="add"
-      />
-      <input
-        type="text"
-        placeholder="Categoria"
-        v-model="nova_categoria"
-        @keydown.enter="add"
-      />
+      <input type="text" placeholder="Categoria" v-model="categoria.nome" @keydown.enter="add" />
       <button @click="add">add</button>
     </div>
     <div class="list_categorias"></div>
@@ -59,7 +48,6 @@ export default {
         <tr>
           <th>ID</th>
           <th>NOME</th>
-          <th>CATEGORIA</th>
           <th>AÇÕES</th>
         </tr>
       </thead>
@@ -67,7 +55,6 @@ export default {
         <tr v-for="categoria in categorias" :key="categoria.id">
           <td>{{ categoria.id }}</td>
           <td>{{ categoria.nome }}</td>
-          <td>{{ categoria.categoria }}</td>
           <td>
             <button @click="excluir(categoria)">Excluir</button>
           </td>

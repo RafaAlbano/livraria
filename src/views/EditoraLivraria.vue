@@ -1,30 +1,33 @@
 <script>
-import axios from "axios";
+import EditorasApi from "@/api/editoras.js";
+const editorasApi = new EditorasApi();
 export default {
   data() {
     return {
-      editoras: [{ nome: "Livro 1", editora: "Editora 1" }],
-      novo_livro: "",
-      nova_editora: "",
+      livro: {},
+      editora: {},
+      editoras: [],
     };
   },
   async created() {
-    const editoras = await axios.get("http://localhost:4000/editoras");
-    this.editoras = editoras.data;
+    this.editoras = await editorasApi.buscarTodosAsEditoras();
   },
   methods: {
     async add() {
-      const editora = {
-        nome: this.novo_livro,
-        editora: this.nova_editora,
-      };
-      const editora_criada = await axios.post("http://localhost:4000/editoras", editora);
-      this.editoras.push(editora_criada)
+      if (this.editora.id) {
+        await editorasApi.atualizarEditora(this.editora);
+      } else {
+        await editorasApi.adicionarEditora(this.editora);
+      }
+      this.editoras = await editorasApi.buscarTodosAsEditoras();
+      this.editora = {};
     },
     async excluir(editora) {
-      await axios.delete(`http://localhost:4000/editoras/${editora.id}`);
-      const indice = this.editoras.indexOf(editora);
-      this.editoras.splice(indice, 1);
+      await editorasApi.excluirEditora(editora.id);
+      this.editoras = await editorasApi.buscarTodosAsEditoras();
+    },
+    editar(editora) {
+      Object.assign(this.editora, editora);
     },
   },
 };
@@ -32,30 +35,26 @@ export default {
 <template>
   <div class="container">
     <div class="title">
-      <h2>Girenciamento de Editoras</h2>
+      <h2>Gerenciamento de Editoras</h2>
     </div>
     <div class="form_input">
-      <input type="text" v-model="novo_livro" placeholder="informe o livro" />
-      <input
-        type="text"
-        v-model="nova_editora"
-        placeholder="informe a editora"
-      />
+      <input type="text" v-model="editora.nome" placeholder="informe o nome" />
+      <input type="text" v-model="editora.site" placeholder="informe o site" />
       <button @click="add">Add</button>
     </div>
     <div class="list_editora">
       <table>
         <thead>
           <tr>
-            <th>LIVRO</th>
             <th>EDITORA</th>
+            <th>SITE</th>
             <th>AÇÕES</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="editora in editoras" :key="editora.id">
             <td>{{ editora.nome }}</td>
-            <td>{{ editora.editora }}</td>
+            <td>{{ editora.site }}</td>
             <td>
               <button @click="excluir(editora)">Excluir</button>
             </td>
