@@ -32,7 +32,7 @@ export default {
 <template>
   <div class="container">
     <div class="title">
-      <h2>Gerenciamento de Autores</h2>
+      <h2>Autores</h2>
     </div>
     <div class="form_input">
       <input type="text" v-model="autor.livro" @keydown.enter="add" placeholder="Informe o livro">

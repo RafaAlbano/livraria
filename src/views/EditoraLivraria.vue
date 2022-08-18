@@ -35,7 +35,7 @@ export default {
 <template>
   <div class="container">
     <div class="title">
-      <h2>Gerenciamento de Editoras</h2>
+      <h2>Editoras</h2>
     </div>
     <div class="form_input">
       <input type="text" v-model="editora.nome" placeholder="informe o nome" />
