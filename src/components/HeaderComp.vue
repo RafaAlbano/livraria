@@ -16,7 +16,7 @@
 <style>
 header {
   height: 9%;
-  width: 100%;
+  width: 1000vh;
   background-color: rgb(123, 169, 209);
   color: rgb(252, 244, 244);
   font-size: 1.5em;

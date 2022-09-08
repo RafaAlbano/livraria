@@ -11,7 +11,7 @@ import HeaderComp from "./components/HeaderComp.vue";
 @import "@/assets/base.css";
 
 #app {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   height: 95vh;
 
