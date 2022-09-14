@@ -18,7 +18,9 @@ export default {
     };
   },
   async created() {
-    const livros = await axios.get("http://localhost:4000/livros");
+    const livros = await axios.get(
+      "https://livraria-rafa.herokuapp.com//livros"
+    );
     this.livros = livros.data;
   },
   methods: {
@@ -29,11 +31,16 @@ export default {
         autor: this.novo_autor,
         editora: this.nova_editora,
       };
-      const indice = this.categorias.indexOf(categoria);
-      this.categorias.splice(indice, 1);
+      const livro_criado = await axios.post(
+        "https://livraria-rafa.herokuapp.com/livros",
+        livro
+      );
+      this.livros.push(livro_criado.data);
     },
     async excluir(livro) {
-      await axios.delete(`http://localhost:4000/livros/${livro.id}`);
+      await axios.delete(
+        `https://livraria-rafa.herokuapp.com/livros/${livro.id}`
+      );
       const indice = this.livros.indexOf(livro);
       this.livros.splice(indice, 1);
     },

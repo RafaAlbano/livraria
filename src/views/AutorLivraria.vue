@@ -1,5 +1,5 @@
 <script>
-import AutoresApi from '../api/autores';
+import AutoresApi from "@/api/autores.js";
 const autoresApi = new AutoresApi();
 export default {
   data() {
@@ -20,7 +20,10 @@ export default {
         await autoresApi.adicionarAutor(this.autor);
       }
       this.autores = await autoresApi.buscarTodosOsAutores();
-      this.autor = {}; autoror(autor.id);
+      this.autor = {};
+    },
+    async excluir(autor) {
+      await autoresApi.excluirAutor(autor.id);
       this.autores = await autoresApi.buscarTodosOsAutores();
     },
     editar(autor) {
@@ -35,8 +38,18 @@ export default {
       <h2>Autores</h2>
     </div>
     <div class="form_input">
-      <input type="text" v-model="autor.livro" @keydown.enter="add" placeholder="Informe o livro">
-      <input type="text" v-model="autor.autor" @keydown.enter="add" placeholder="Informe o autor">
+      <input
+        type="text"
+        v-model="autor.livro"
+        @keydown.enter="add"
+        placeholder="Informe o livro"
+      />
+      <input
+        type="text"
+        v-model="autor.autor"
+        @keydown.enter="add"
+        placeholder="Informe o autor"
+      />
       <button @click="add">Add</button>
     </div>
     <div class="list_autores">

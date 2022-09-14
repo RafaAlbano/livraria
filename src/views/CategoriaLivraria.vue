@@ -6,8 +6,7 @@ export default {
     return {
       categoria: {},
       categorias: [],
-      nome: []
-
+      nome: [],
     };
   },
   async created() {
@@ -39,7 +38,12 @@ export default {
       <h2>Categorias</h2>
     </div>
     <div class="form_input">
-      <input type="text" placeholder="Categoria" v-model="categoria.nome" @keydown.enter="add" />
+      <input
+        type="text"
+        placeholder="Categoria"
+        v-model="categoria.nome"
+        @keydown.enter="add"
+      />
       <button @click="add">add</button>
     </div>
     <div class="list_categorias"></div>
